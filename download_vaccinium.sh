@@ -10,32 +10,18 @@ cd vaccinium_data
 # publicly available. The others just have GenBank assemblies.
 #
 # BioProject: PRJNA494180
-# SRA Run: SRR7992602 — paired-end Illumina
-################################################################################
-
-#echo "Downloading V. corymbosum cv. Draper (NHB)"
-
-# Grab the raw .sra file from NCBI's cloud server
-#prefetch SRR7992602
-
-# Convert .sra to gzipped FASTQ files, split into R1 and R2 (paired-end)
-# Will generate: SRR7992602_1.fastq.gz and SRR7992602_2.fastq.gz
-#fasterq-dump SRR7992602 --split-files --gzip
-#Actually, maybe we will just download an available chloroplast genome instead of raw reads for this species so we have the same starting ground for all 
-
-################################################################################
-# GenBank assemblies from the same paper (no raw reads, but still useful)
+# GenBank assemblies from the paper (no raw reads, but still useful)
 # These are the cpDNA assemblies submitted by the authors
 ################################################################################
 
 # Array of GenBank accession numbers for the plastomes used in the study
 assemblies=(
-  "OM791342"     # SHB - 'Arcadia' (southern highbush blueberry)
-  "OM791343"     # RB - 'Ochlockonee' (rabbiteye blueberry)
-  "BK061167"     # NHB - 'Draper' (same one we got raw reads for above)
-  "OM791344"     # LB - 'Brunswick' (lowbush blueberry)
-  "OM809159"     # BB - 'OU-L2' (bilberry)
-  "MK715447.1"   # CB - 'Stevens' (cranberry, from a previous study)
+  "OM791342"     # V. corymbosum hybrid cv. ‘Arcadia’ (SHB)
+  "OM791343"     # V. virgatum cv. ‘Ochlockonee’
+  "BK061167"     # V. corymbosum cv. ‘Draper’
+  "OM791344"     # V. angustifolium cv. ‘Brunswick’ 
+  "OM809159"     # V. myrtillus genotype ‘OU-L2’:
+  "MK715447.1"   # V. macrocarpon cv. ‘Stevens’  (cranberry, from a previous study)
 )
 
 # Pull down each GenBank cpDNA file
@@ -47,15 +33,26 @@ done
 
 echo "All downloads from paper complete"
 
-echo "Downloading additional Vaccinium cpDNA genomes..."
+echo "Downloading additional Vaccinium cpDNA genomes"
 
 extra_assemblies=(
-  "MZ328079"     # V. corymbosum (NHB, different from Draper, complete cpDNA)
-  "NC_042713.1"  # V. oldhamii
-  "LC521968.1"   # V. uliginosum
-  "LC521969.1"   # V. vitis-idaea
-  "MW006668.1"   # V. japonicum
-  "LC521967.1"   # V. bracteatum
+  "NC_042713.1"  # V. oldhamii also included in paper 
+  "LC521967.1"   # V. bracteatum also included in paper 
+  "MK816300.1"   # V. duclouxii also included in paper 
+  "MK816301.1"   # V. fragile also included in paper 
+  "LC521968.1"   # V. uliginosum also included in paper 
+  "MW006668.1"   # V. japonicum also included in paper 
+  "MK715444.1"   # V. microcarpum also included in paper  
+  "LC521969.1"   # V. vitis-idaea also included in paper 
+  "KJ463365.1"   # Chamaedaphne calyculata - outgroup 1
+  "NC_059849.1"  # Gaultheria fragrantissima - outgroup 2
+  "MW801381.1"   # Lyonia ovalifolia
+  "MW801359.1"   # Pieris formosa ####################### EXTRA ONES NEW TO OUR ANALYSIS BELOW:
+  "NC_061952.1"  # Vaccinium boninense - endemic japanese species, expands biogeographic diversity 
+  "NC_058740.1"  # Vaccinium oxycoccos - european cranberry
+  "MW006669.1"   # Vaccinium emarginatum - lesser known east asian species 
+  "MN885885.1"   # Vaccinium dunalianum - wild chinese blueberry, useful for rooting the cyanococcus group 
+  "NC_045192.1"  # Vaccinium coriaceum - rare tropical species
 )
 
 for acc in "${extra_assemblies[@]}"; do
@@ -68,19 +65,35 @@ echo "All extra cpDNA genomes downloaded!"
 echo "Renaming all cpDNA FASTA files..."
 
 # From Fahrenkrog et al. 2022
-mv OM791342.fasta   Vaccinium_corymbosum_SHB_Arcadia.fasta
-mv OM791343.fasta   Vaccinium_virgatum_RB_Ochlockonee.fasta
-mv OM791344.fasta   Vaccinium_angustifolium_LB_Brunswick.fasta
-mv OM809159.fasta   Vaccinium_myrtillus_BB_OUL2.fasta
-mv MK715447.1.fasta Vaccinium_macrocarpon_CB_Stevens.fasta
-mv BK061167.fasta   Vaccinium_corymbosum_NHB_Draper.fasta
+mv OM791342.fasta   Vaccinium_corymbosum_hybrid_SHB.fasta
+mv OM791343.fasta   Vaccinium_virgatum_.fasta
+mv OM791344.fasta   Vaccinium_angustifolium.fasta
+mv OM809159.fasta   Vaccinium_myrtillus.fasta
+mv MK715447.1.fasta Vaccinium_macrocarpon.fasta
+mv BK061167.fasta   Vaccinium_corymbosum_NHB.fasta
 
-# Extra species (GenBank plastomes)
-mv MZ328079.fasta     Vaccinium_corymbosum_NHB_Complete.fasta
+# Already-included extra species
 mv NC_042713.1.fasta  Vaccinium_oldhamii.fasta
-mv LC521968.1.fasta   Vaccinium_uliginosum.fasta
-mv LC521969.1.fasta   Vaccinium_vitis_idaea.fasta
-mv MW006668.1.fasta   Vaccinium_japonicum.fasta
 mv LC521967.1.fasta   Vaccinium_bracteatum.fasta
+mv MK816300.1.fasta   Vaccinium_duclouxii.fasta
+mv MK816301.1.fasta   Vaccinium_fragile.fasta
+mv LC521968.1.fasta   Vaccinium_uliginosum.fasta
+mv MW006668.1.fasta   Vaccinium_japonicum.fasta
+mv MK715444.1.fasta   Vaccinium_microcarpum.fasta
+mv LC521969.1.fasta   Vaccinium_vitis_idaea.fasta
+
+# Outgroups and Ericaceae relatives
+mv KJ463365.1.fasta   Chamaedaphne_calyculata.fasta
+mv NC_059849.1.fasta  Gaultheria_fragrantissima.fasta
+mv MW801381.1.fasta   Lyonia_ovalifolia.fasta
+mv MW801359.1.fasta   Pieris_formosa.fasta
+
+# New additions to our analysis
+mv NC_061952.1.fasta  Vaccinium_boninense.fasta
+mv NC_058740.1.fasta  Vaccinium_oxycoccos.fasta
+mv MW006669.1.fasta   Vaccinium_emarginatum.fasta
+mv MN885885.1.fasta   Vaccinium_dunalianum.fasta
+mv NC_045192.1.fasta  Vaccinium_coriaceum.fasta
+
 
 echo "Files renamed"
