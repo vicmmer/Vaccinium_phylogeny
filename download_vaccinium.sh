@@ -5,7 +5,7 @@ mkdir -p vaccinium_data
 cd vaccinium_data
 
 ################################################################################
-# 🍇 Vaccinium: Northern Highbush Blueberry (NHB) aka 'Draper'
+# Vaccinium: Northern Highbush Blueberry (NHB) aka 'Draper'
 # This is the only sample from the Fahrenkrog et al. 2022 paper with raw WGS reads
 # publicly available. The others just have GenBank assemblies.
 #
@@ -24,7 +24,7 @@ cd vaccinium_data
 #Actually, maybe we will just download an available chloroplast genome instead of raw reads for this species so we have the same starting ground for all 
 
 ################################################################################
-# 🍓 GenBank assemblies from the same paper (no raw reads, but still useful)
+# GenBank assemblies from the same paper (no raw reads, but still useful)
 # These are the cpDNA assemblies submitted by the authors
 ################################################################################
 
