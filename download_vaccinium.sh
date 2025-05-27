@@ -48,11 +48,11 @@ extra_assemblies=(
   "NC_059849.1"  # Gaultheria fragrantissima - outgroup 2
   "MW801381.1"   # Lyonia ovalifolia
   "MW801359.1"   # Pieris formosa ####################### EXTRA ONES NEW TO OUR ANALYSIS BELOW:
-  "NC_061952.1"  # Vaccinium boninense - endemic japanese species, expands biogeographic diversity 
   "NC_058740.1"  # Vaccinium oxycoccos - european cranberry
-  "MW006669.1"   # Vaccinium emarginatum - lesser known east asian species 
-  "MN885885.1"   # Vaccinium dunalianum - wild chinese blueberry, useful for rooting the cyanococcus group 
-  "NC_045192.1"  # Vaccinium coriaceum - rare tropical species
+  "ON480526.1"   # Vaccinium ashei 
+  "PQ036140.1"   # Vaccinium supracostatum
+  "PP788841.1"   # Vaccinium henryi
+  "NC_073583.1"  # Vaccinium floribundum 
 )
 
 for acc in "${extra_assemblies[@]}"; do
@@ -89,11 +89,10 @@ mv MW801381.1.fasta   Lyonia_ovalifolia.fasta
 mv MW801359.1.fasta   Pieris_formosa.fasta
 
 # New additions to our analysis
-mv NC_061952.1.fasta  Vaccinium_boninense.fasta
-mv NC_058740.1.fasta  Vaccinium_oxycoccos.fasta
-mv MW006669.1.fasta   Vaccinium_emarginatum.fasta
-mv MN885885.1.fasta   Vaccinium_dunalianum.fasta
-mv NC_045192.1.fasta  Vaccinium_coriaceum.fasta
-
+mv NC_058740.1.fasta  Vaccinium_oxycoccos.fasta  
+mv ON480526.1.fasta   Vaccinium_ashei.fasta
+mv PQ036140.1.fasta   Vaccinium_supracostatum.fasta 
+mv PP788841.1.fasta   Vaccinium_henryi.fasta
+mv NC_073583.1.fasta  Vaccinium_floribundum.fasta
 
 echo "Files renamed"
