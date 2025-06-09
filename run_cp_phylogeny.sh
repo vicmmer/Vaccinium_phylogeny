@@ -1,6 +1,13 @@
 #!/bin/bash
 echo "Starting pipeline: $(date)"
 
+# This assumes cp_tree_env contains:
+# - mafft
+# - trimal
+# - iqtree2
+source /home/vmartinez/miniconda3/etc/profile.d/conda.sh
+conda activate cp_tree_env
+
 # Output file names
 ALN_FILE="aligned_plastomes.fasta"
 TRIMMED_ALN="aligned_plastomes_trimmed.fasta"
@@ -12,7 +19,7 @@ TREE_PREFIX="vaccinium_cp_tree"
 # in this folder.
 # -----------------------------------------------
 echo "Step 1: Combining FASTAs"
-cat *.fasta > all_plastomes.fasta
+cat vaccinium_data/*.fasta > all_plastomes.fasta
 
 # -----------------------------------------------
 # STEP 2: Align with MAFFT
